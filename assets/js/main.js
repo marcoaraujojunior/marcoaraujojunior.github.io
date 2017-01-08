@@ -24,15 +24,27 @@
 		xsmall: '(max-width: 480px)'
 	});
 
+    formtatDate = function(date) {
+        date = new Date(date);
+        return date.getFullYear() + '-'+
+            ('0' + (date.getMonth()+1) ).slice(-2) + '-' +
+            ('0' + date.getDate() ).slice(-2) + ' ' +
+            ('0' + date.getHours() ).slice(-2) + ':' +
+            ('0' + date.getMinutes() ).slice(-2) + ':' +
+            ('0' + date.getSeconds() ).slice(-2);
+    };
+
     article = function (item) {
+        pushedAt = formtatDate(item.pushed_at);
         return '<article class="6u 12u$(xsmall) work-item">' +
             '<a href="' + item.html_url + '" class="image fit thumb">' +
                 '<img src="images/thumbs/github.png" alt="" />' +
             '</a>' +
             '<h3>' +item.name+ '</h3>' +
             '<p>' + item.description + '</p>'+
+            '<p> Pushed At: ' + pushedAt + '</p>'+
         '</article>';
-    }
+    };
 
 	$(function() {
 
@@ -123,9 +135,19 @@
 
 			// Lightbox gallery.
 				$window.on('load', function() {
+                    var date = new Date();
+                    date.setMonth(date.getMonth() - 3);
+                    pushedTo = date.getFullYear() + '-'+
+                        ('0' + (date.getMonth()+1) ).slice(-2) + '-' +
+                        ('0' + date.getDate() ).slice(-2);
+
                     $.getJSON(
                         "https://api.github.com/search/repositories",
-                        { q: 'user:marcoaraujojunior fork:true', sort: "updated", order: "desc" },
+                        {
+                            q: 'user:marcoaraujojunior pushed:>' + pushedTo +' fork:true',
+                            sort: "updated",
+                            order: "desc"
+                        },
                         function (data) {
                             for (i in data.items) {
                                 $("#two > div").append(article(data.items[i]));
