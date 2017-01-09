@@ -1,28 +1,28 @@
 /*
-	Strata by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+    Strata by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
 (function($) {
 
-	var settings = {
+    var settings = {
 
-		// Parallax background effect?
-			parallax: true,
+        // Parallax background effect?
+            parallax: true,
 
-		// Parallax factor (lower = more intense, higher = less intense).
-			parallaxFactor: 20
+        // Parallax factor (lower = more intense, higher = less intense).
+            parallaxFactor: 20
 
-	};
+    };
 
-	skel.breakpoints({
-		xlarge: '(max-width: 1800px)',
-		large: '(max-width: 1280px)',
-		medium: '(max-width: 980px)',
-		small: '(max-width: 736px)',
-		xsmall: '(max-width: 480px)'
-	});
+    skel.breakpoints({
+        xlarge: '(max-width: 1800px)',
+        large: '(max-width: 1280px)',
+        medium: '(max-width: 980px)',
+        small: '(max-width: 736px)',
+        xsmall: '(max-width: 480px)'
+    });
 
     formtatDate = function(date) {
         date = new Date(date);
@@ -51,95 +51,95 @@
         '</article>';
     };
 
-	$(function() {
+    $(function() {
 
-		var $window = $(window),
-			$body = $('body'),
-			$header = $('#header'),
-			$footer = $('#footer'),
-			$main = $('#main');
+        var $window = $(window),
+            $body = $('body'),
+            $header = $('#header'),
+            $footer = $('#footer'),
+            $main = $('#main');
 
-		// Disable animations/transitions until the page has loaded.
-			$body.addClass('is-loading');
+        // Disable animations/transitions until the page has loaded.
+            $body.addClass('is-loading');
 
-			$window.on('load', function() {
-				$body.removeClass('is-loading');
-			});
+            $window.on('load', function() {
+                $body.removeClass('is-loading');
+            });
 
-		// Touch?
-			if (skel.vars.mobile) {
+        // Touch?
+            if (skel.vars.mobile) {
 
-				// Turn on touch mode.
-					$body.addClass('is-touch');
+                // Turn on touch mode.
+                    $body.addClass('is-touch');
 
-				// Height fix (mostly for iOS).
-					window.setTimeout(function() {
-						$window.scrollTop($window.scrollTop() + 1);
-					}, 0);
+                // Height fix (mostly for iOS).
+                    window.setTimeout(function() {
+                        $window.scrollTop($window.scrollTop() + 1);
+                    }, 0);
 
-			}
+            }
 
-		// Fix: Placeholder polyfill.
-			$('form').placeholder();
+        // Fix: Placeholder polyfill.
+            $('form').placeholder();
 
-		// Prioritize "important" elements on medium.
-			skel.on('+medium -medium', function() {
-				$.prioritize(
-					'.important\\28 medium\\29',
-					skel.breakpoint('medium').active
-				);
-			});
+        // Prioritize "important" elements on medium.
+            skel.on('+medium -medium', function() {
+                $.prioritize(
+                    '.important\\28 medium\\29',
+                    skel.breakpoint('medium').active
+                );
+            });
 
-		// Footer.
-			skel.on('+medium', function() {
-				$footer.insertAfter($main);
-			});
+        // Footer.
+            skel.on('+medium', function() {
+                $footer.insertAfter($main);
+            });
 
-			skel.on('-medium !medium', function() {
-				$footer.appendTo($header);
-			});
+            skel.on('-medium !medium', function() {
+                $footer.appendTo($header);
+            });
 
-		// Header.
+        // Header.
 
-			// Parallax background.
+            // Parallax background.
 
-				// Disable parallax on IE (smooth scrolling is jerky), and on mobile platforms (= better performance).
-					if (skel.vars.browser == 'ie'
-					||	skel.vars.mobile)
-						settings.parallax = false;
+                // Disable parallax on IE (smooth scrolling is jerky), and on mobile platforms (= better performance).
+                    if (skel.vars.browser == 'ie'
+                    ||    skel.vars.mobile)
+                        settings.parallax = false;
 
-				if (settings.parallax) {
+                if (settings.parallax) {
 
-					skel.on('change', function() {
+                    skel.on('change', function() {
 
-						if (skel.breakpoint('medium').active) {
+                        if (skel.breakpoint('medium').active) {
 
-							$window.off('scroll.strata_parallax');
-							$header.css('background-position', 'top left, center center');
+                            $window.off('scroll.strata_parallax');
+                            $header.css('background-position', 'top left, center center');
 
-						}
-						else {
+                        }
+                        else {
 
-							$header.css('background-position', 'left 0px');
+                            $header.css('background-position', 'left 0px');
 
-							$window.on('scroll.strata_parallax', function() {
-								$header.css('background-position', 'left ' + (-1 * (parseInt($window.scrollTop()) / settings.parallaxFactor)) + 'px');
-							});
+                            $window.on('scroll.strata_parallax', function() {
+                                $header.css('background-position', 'left ' + (-1 * (parseInt($window.scrollTop()) / settings.parallaxFactor)) + 'px');
+                            });
 
-						}
+                        }
 
-					});
+                    });
 
-					$window.on('load', function() {
-						$window.triggerHandler('scroll');
-					});
+                    $window.on('load', function() {
+                        $window.triggerHandler('scroll');
+                    });
 
-				}
+                }
 
-		// Main Sections: Two.
+        // Main Sections: Two.
 
-			// Lightbox gallery.
-				$window.on('load', function() {
+            // Lightbox gallery.
+                $window.on('load', function() {
                     var date = new Date();
                     date.setMonth(date.getMonth() - 3);
                     pushedTo = date.getFullYear() + '-'+
@@ -159,7 +159,7 @@
                             }
                         }
                     );
-				});
-	});
+                });
+    });
 
 })(jQuery);
