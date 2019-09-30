@@ -41,7 +41,7 @@
 
     article = function (item) {
         pushedAt = formtatDate(item.pushed_at);
-        return '<article class="6u 12u$(xsmall) work-item">' +
+        return '<article class="6u 12u$(xsmall) work-item" target="_blank">' +
             '<a href="' + item.html_url + '" class="image fit thumb">' +
                 '<img src="images/thumbs/github.png" alt="" />' +
             '</a>' +
